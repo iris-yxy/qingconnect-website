@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer-content">
+      <div className="container footer-content footer-content-simple">
         <div className="footer-brand">
           <span className="footer-mark">QC</span>
           <div>
@@ -13,30 +13,22 @@ function Footer() {
           </div>
         </div>
 
-        <div className="footer-grid">
-          <div>
-            <h4>Core Services</h4>
-            <p>Professional interpreting</p>
-            <p>Communication preparation</p>
-            <p>Cultural and language bridging</p>
+        <div className="footer-middle">
+          <div className="footer-contact-inline">
+            <span>Contact</span>
+            <a className="footer-email" href="mailto:christinacq2010@hotmail.com">
+              christinacq2010@hotmail.com
+            </a>
           </div>
 
-          <div>
-            <h4>Delivery</h4>
-            <p>Telephone interpreting</p>
-            <p>Video conferencing</p>
-            <p>Support across Australia</p>
-          </div>
-
-          <div>
-            <h4>Contact</h4>
-            <p>info@qingconnectinterpreting.com.au</p>
-            <p>Urgent enquiries can be marked "URGENT"</p>
+          <div className="footer-meta">
+            <span>Australia-wide</span>
+            <span>Telephone & video conferencing</span>
+            <span>Mandarin-English support</span>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p>Built for clear, calm and culturally informed communication.</p>
+        <div className="footer-bottom footer-bottom-simple">
           <p>© 2026 QingConnect. All rights reserved.</p>
         </div>
       </div>
