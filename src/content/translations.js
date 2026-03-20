@@ -1,5 +1,3 @@
-const recipientEmail = 'christinacq2010@hotmail.com'
-
 export const translations = {
   en: {
     header: {
@@ -155,6 +153,11 @@ export const translations = {
         },
         support: {
           title: 'How QingConnect supports clients and services',
+          highlights: [
+            'Workers’ compensation and personal injury matters',
+            'Family violence, My Aged Care and NDIS-related services',
+            'Clear, accurate and culturally informed communication',
+          ],
           paragraphs: [
             'QingConnect provides professional Mandarin-English interpreting and communication support across a range of complex and sensitive settings, including workers’ compensation and personal injury matters, family violence cases, as well as My Aged Care and NDIS-related services.',
             'The service supports clear, accurate, and culturally informed communication between clients and service providers, ensuring that Mandarin-speaking clients can understand their rights, express their needs with confidence, and engage meaningfully in decision-making processes.',
@@ -185,24 +188,35 @@ export const translations = {
     services: {
       title: 'Who We Support',
       lead:
-        'QingConnect supports two key groups: professionals working with Mandarin-speaking clients, and Mandarin-speaking clients preparing for important professional meetings.',
+        'Choose the service pathway that best matches who you are supporting.',
+      buttons: {
+        professionals: 'Click for more information',
+        clients: 'Click for more information',
+      },
       audienceCards: {
         professionals: {
-          label: 'Working with Professionals',
-          title: 'Support for organisations working with Mandarin-speaking clients.',
+          badge: 'Pathway 01',
+          label: 'Support for organisations and service providers',
+          title: 'Working with Professionals',
           text:
             'QingConnect supports organisations such as law firms, insurers, investigators, medical and mental health practitioners, rehabilitation providers, and government or private service providers.',
+          highlights: ['Law firms', 'Insurers', 'Medical & mental health'],
         },
         clients: {
-          label: 'Mandarin-speaking Clients',
-          title: 'Support for clients preparing for important professional meetings.',
+          badge: 'Pathway 02',
+          label: 'Support for clients preparing for important appointments',
+          title: 'Mandarin-speaking Clients',
           text:
             'QingConnect supports Mandarin-speaking clients in Australia with interpreting and communication preparation before important appointments and meetings.',
+          highlights: ['Interpreting support', 'Meeting preparation', 'Clear communication'],
         },
       },
       professionals: {
+        pageTitle: 'Working with Professionals',
         kicker: 'Working with professionals',
         title: 'Support for organisations working with Mandarin-speaking clients.',
+        introLabel: 'Who this is for',
+        sideLabel: 'Why this helps',
         intro:
           'QingConnect supports organisations that work with Mandarin-speaking clients, including:',
         list: [
@@ -231,8 +245,13 @@ export const translations = {
         ],
       },
       clients: {
+        pageTitle: 'Mandarin-speaking Clients',
         kicker: 'Supporting Mandarin-speaking clients',
         title: 'Help for clients preparing for important appointments and meetings.',
+        introLabel: 'How support is provided',
+        sideLabel: 'What this supports',
+        highlights: ['Interpreting support', 'Meeting preparation', 'Clearer communication'],
+        note: 'Designed to help clients feel more prepared, more confident and better understood.',
         paragraphs: [
           'If you are a Mandarin-speaking client in Australia preparing for an important meeting with a lawyer, insurer, medical and mental health practitioners or other professional service providers, QingConnect can support you with interpreting and communication preparation.',
           'Our services is to help you communicate your situation accurately, confidently and efficiently.',
@@ -285,6 +304,7 @@ export const translations = {
         'QingConnect provides professional Mandarin-English interpreting services Australia-wide, with flexible delivery via telephone and video conferencing.',
       leadSecondary:
         'All bookings can be made by submitting a service request form. Once your request is received, confirmation will be provided based on availability.',
+      introTags: ['Australia-wide service', 'Telephone & video delivery', 'Flexible booking support'],
       guidelines: [
         {
           title: 'Booking Notice',
@@ -331,7 +351,6 @@ export const translations = {
         },
         submit: 'Submit Request',
         submitting: 'Sending...',
-        note: `Once deployed on Netlify, this form will submit directly to QingConnect and send notifications to ${recipientEmail}.`,
         success: 'Thank you. Your enquiry has been submitted successfully.',
         error: 'There was a problem sending your enquiry. Please try again.',
       },
@@ -462,6 +481,11 @@ export const translations = {
         },
         support: {
           title: 'QingConnect 如何支持客户与服务机构',
+          highlights: [
+            '工伤赔偿与人身伤害相关事务',
+            '家庭暴力、My Aged Care 与 NDIS 相关服务',
+            '清晰、准确且兼顾文化背景的沟通支持',
+          ],
           paragraphs: [
             'QingConnect 在多种复杂且敏感的场景中提供专业的中英口译与沟通支持，包括工伤赔偿、个人伤害案件、家庭暴力相关事务，以及 My Aged Care 和 NDIS 相关服务。',
             '我们的服务帮助客户与服务提供方之间建立清晰、准确并兼顾文化背景的沟通，让普通话客户能够理解自身权利、自信表达需求，并真正参与到决策过程中。',
@@ -481,24 +505,35 @@ export const translations = {
     },
     services: {
       title: '我们服务谁',
-      lead: 'QingConnect 主要服务两类群体：与普通话客户合作的专业人士，以及需要为重要会谈做准备的普通话客户。',
+      lead: '请选择最符合你需求的服务入口。',
+      buttons: {
+        professionals: '点击查看更多信息',
+        clients: '点击查看更多信息',
+      },
       audienceCards: {
         professionals: {
-          label: '专业人士',
-          title: '为与普通话客户合作的机构和专业人员提供支持。',
+          badge: '路径 01',
+          label: '面向机构与专业服务提供者',
+          title: 'Working with Professionals',
           text:
             'QingConnect 支持律师事务所、保险公司、调查人员、医疗与心理健康从业者、康复服务机构以及政府或私人服务机构。',
+          highlights: ['律师事务所', '保险公司', '医疗与心理健康'],
         },
         clients: {
-          label: '普通话客户',
-          title: '为即将参加重要专业会谈的客户提供支持。',
+          badge: '路径 02',
+          label: '面向准备重要预约与会谈的客户',
+          title: 'Mandarin-speaking Clients',
           text:
             'QingConnect 为在澳普通话客户提供口译及沟通准备支持，帮助他们应对重要预约与专业会议。',
+          highlights: ['口译支持', '会前准备', '清晰沟通'],
         },
       },
       professionals: {
+        pageTitle: 'Working with Professionals',
         kicker: '与专业人士合作',
         title: '为与普通话客户合作的机构和专业人员提供支持。',
+        introLabel: '适用对象',
+        sideLabel: '服务价值',
         intro: 'QingConnect 支持与普通话客户合作的机构与个人，包括：',
         list: ['律师事务所', '保险公司', '调查人员', '医疗与心理健康从业者', '康复服务机构', '政府、非政府机构及私人服务提供者'],
         closing: '我们的服务帮助沟通保持准确、尊重且高效。',
@@ -509,8 +544,13 @@ export const translations = {
         ],
       },
       clients: {
+        pageTitle: 'Mandarin-speaking Clients',
         kicker: '支持普通话客户',
         title: '帮助客户为重要预约与会议做好准备。',
+        introLabel: '支持方式',
+        sideLabel: '可以帮助你做到',
+        highlights: ['口译支持', '会前准备', '更清晰的表达'],
+        note: '帮助客户在重要沟通前更有准备、更有信心，也更容易被理解。',
         paragraphs: [
           '如果你是在澳洲、正准备与律师、保险公司、医疗或心理健康专业人士，或其他专业服务提供者进行重要沟通的普通话客户，QingConnect 可以为你提供口译与沟通准备支持。',
           '我们的服务旨在帮助你更准确、更自信、更高效地表达自己的情况。',
@@ -557,6 +597,7 @@ export const translations = {
       title: '预约与咨询',
       lead: 'QingConnect 在澳洲全境提供专业中英口译服务，并可通过电话及视频会议灵活开展。',
       leadSecondary: '所有预约均可通过提交服务申请表进行。收到请求后，我们会根据可用时间进行确认。',
+      introTags: ['澳洲全境服务', '电话与视频方式', '灵活预约支持'],
       guidelines: [
         {
           title: '预约须知',
@@ -596,7 +637,6 @@ export const translations = {
         },
         submit: '提交申请',
         submitting: '提交中...',
-        note: `部署到 Netlify 后，这个表单会直接提交给 QingConnect，并把通知发送到 ${recipientEmail}。`,
         success: '提交成功，我们已收到你的咨询信息。',
         error: '提交失败，请稍后再试。',
       },

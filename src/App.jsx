@@ -4,14 +4,20 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
+import ServicesProfessionals from './pages/ServicesProfessionals'
+import ServicesClients from './pages/ServicesClients'
 import WhyChooseUs from './pages/WhyChooseUs'
 import Booking from './pages/Booking'
 import { translations } from './content/translations'
+import brandImage from './assets/image.png'
+import { getTransparentBrandLogo } from './utils/brandLogo'
 
 const routes = {
   '/': Home,
   '/about': About,
   '/services': Services,
+  '/services/professionals': ServicesProfessionals,
+  '/services/clients': ServicesClients,
   '/access': Services,
   '/why-choose-us': WhyChooseUs,
   '/booking': Booking,
@@ -22,6 +28,8 @@ const routeCopyKeys = {
   '/': 'home',
   '/about': 'about',
   '/services': 'services',
+  '/services/professionals': 'servicesProfessionals',
+  '/services/clients': 'servicesClients',
   '/access': 'services',
   '/why-choose-us': 'why',
   '/booking': 'booking',
@@ -66,6 +74,29 @@ function App() {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'
   }, [language])
 
+  useEffect(() => {
+    let active = true
+
+    getTransparentBrandLogo(brandImage).then((logoSource) => {
+      if (!active) {
+        return
+      }
+
+      let favicon = document.querySelector("link[rel='icon']")
+      if (!favicon) {
+        favicon = document.createElement('link')
+        favicon.setAttribute('rel', 'icon')
+        document.head.appendChild(favicon)
+      }
+
+      favicon.setAttribute('href', logoSource)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   const navigate = (nextPath) => {
     const normalized = normalizePath(nextPath)
     window.history.pushState({}, '', normalized)
@@ -74,6 +105,12 @@ function App() {
 
   const ActivePage = routes[pathname] ?? Home
   const copy = translations[language]
+  const pageCopy =
+    pathname === '/services/professionals'
+      ? copy.services.professionals
+      : pathname === '/services/clients'
+        ? copy.services.clients
+        : copy[routeCopyKeys[pathname] ?? 'home']
 
   return (
     <div className="app">
@@ -85,7 +122,7 @@ function App() {
         copy={copy.header}
       />
       <main className="page-main">
-        <ActivePage navigate={navigate} copy={copy[routeCopyKeys[pathname] ?? 'home']} />
+        <ActivePage navigate={navigate} copy={pageCopy} />
       </main>
       <Footer copy={copy.footer} />
     </div>

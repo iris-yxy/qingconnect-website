@@ -1,4 +1,14 @@
+import BrandLogo from './BrandLogo'
+
 function Header({ currentPath, navigate, language, setLanguage, copy }) {
+  const isNavItemActive = (path) => {
+    if (path === '/services') {
+      return currentPath === '/services' || currentPath.startsWith('/services/')
+    }
+
+    return currentPath === path
+  }
+
   return (
     <header className="header">
       <div className="header-ribbon">
@@ -16,7 +26,7 @@ function Header({ currentPath, navigate, language, setLanguage, copy }) {
             navigate('/')
           }}
         >
-          <span className="logo-mark">QC</span>
+          <BrandLogo className="brand-logo-image header-brand-image" />
           <span className="logo-copy">
             <h2>{copy.brandTitle}</h2>
             <p>{copy.brandSubtitle}</p>
@@ -29,7 +39,7 @@ function Header({ currentPath, navigate, language, setLanguage, copy }) {
               <a
                 key={item.path}
                 href={item.path}
-                className={currentPath === item.path ? 'nav-link active' : 'nav-link'}
+                className={isNavItemActive(item.path) ? 'nav-link active' : 'nav-link'}
                 onClick={(event) => {
                   event.preventDefault()
                   navigate(item.path)

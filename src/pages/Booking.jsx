@@ -48,34 +48,34 @@ function Booking({ copy }) {
   return (
     <section className="page-section booking-page">
       <div className="container">
-        <div className="booking-hero-simple">
-          <h1 className="booking-title">{copy.title}</h1>
-          <p className="booking-lead">{copy.lead}</p>
-          <p className="booking-lead-secondary">{copy.leadSecondary}</p>
-        </div>
+        <div className="booking-intro-shell">
+          <div className="booking-hero-simple">
+            <p className="booking-kicker">Booking & contact information</p>
+            <h1 className="booking-title">{copy.title}</h1>
+            <p className="booking-lead">{copy.lead}</p>
+            <p className="booking-lead-secondary">{copy.leadSecondary}</p>
+            <div className="booking-intro-tags">
+              {copy.introTags.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </div>
 
-        <div className="booking-guidelines booking-guidelines-refined">
-          {copy.guidelines.map((item, index) => (
-            <article
-              key={item.title}
-              className={`booking-guideline-card ${
-                index === 0
-                  ? 'booking-guideline-card-primary'
-                  : index === 1
-                    ? 'booking-guideline-card-fees'
-                    : 'booking-guideline-card-cancellations'
-              }`}
-            >
-              <div className="booking-guideline-heading">
-                <h3>{item.title}</h3>
-              </div>
-              <div className="booking-guideline-body">
-                {item.points.map((point) => (
-                  <p key={point}>{point}</p>
-                ))}
-              </div>
-            </article>
-          ))}
+          <div className="booking-guidelines booking-guidelines-refined">
+            {copy.guidelines.map((item, index) => (
+              <article key={item.title} className="booking-guideline-card">
+                <div className="booking-guideline-heading">
+                  <span className="booking-guideline-index">{`0${index + 1}`}</span>
+                  <h3>{item.title}</h3>
+                </div>
+                <div className="booking-guideline-body">
+                  {item.points.map((point) => (
+                    <p key={point}>{point}</p>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
         <div className="booking-form-shell">
@@ -158,7 +158,6 @@ function Booking({ copy }) {
             >
               {submitState === 'submitting' ? copy.form.submitting : copy.form.submit}
             </button>
-            <p className="booking-form-note">{copy.form.note}</p>
             {submitState === 'success' ? (
               <p className="booking-form-status booking-form-status-success">{copy.form.success}</p>
             ) : null}

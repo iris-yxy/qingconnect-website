@@ -1,4 +1,4 @@
-function Services({ copy }) {
+function Services({ copy, navigate }) {
   return (
     <section className="page-section services-page">
       <div className="container">
@@ -9,72 +9,52 @@ function Services({ copy }) {
           </div>
 
           <div className="services-audience-switch">
-            <a href="#professionals" className="audience-card audience-card-professionals">
-              <span className="audience-label">{copy.audienceCards.professionals.label}</span>
+            <article className="audience-card audience-card-professionals audience-card-entry">
+              <div className="audience-card-topline">
+                <span className="audience-badge">{copy.audienceCards.professionals.badge}</span>
+              </div>
               <h2>{copy.audienceCards.professionals.title}</h2>
+              <span className="audience-label">{copy.audienceCards.professionals.label}</span>
               <p>{copy.audienceCards.professionals.text}</p>
-            </a>
+              <div className="audience-highlights">
+                {copy.audienceCards.professionals.highlights.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+              <div className="audience-card-actions">
+                <button
+                  type="button"
+                  className="btn btn-secondary audience-card-button"
+                  onClick={() => navigate('/services/professionals')}
+                >
+                  {copy.buttons.professionals}
+                </button>
+              </div>
+            </article>
 
-            <a href="#clients" className="audience-card audience-card-clients">
-              <span className="audience-label">{copy.audienceCards.clients.label}</span>
+            <article className="audience-card audience-card-clients audience-card-entry">
+              <div className="audience-card-topline">
+                <span className="audience-badge">{copy.audienceCards.clients.badge}</span>
+              </div>
               <h2>{copy.audienceCards.clients.title}</h2>
+              <span className="audience-label">{copy.audienceCards.clients.label}</span>
               <p>{copy.audienceCards.clients.text}</p>
-            </a>
+              <div className="audience-highlights">
+                {copy.audienceCards.clients.highlights.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+              <div className="audience-card-actions">
+                <button
+                  type="button"
+                  className="btn btn-secondary audience-card-button"
+                  onClick={() => navigate('/services/clients')}
+                >
+                  {copy.buttons.clients}
+                </button>
+              </div>
+            </article>
           </div>
-        </div>
-
-        <div className="services-detail-sections">
-          <section id="professionals" className="audience-section">
-            <div className="audience-section-heading">
-              <p className="audience-section-kicker">{copy.professionals.kicker}</p>
-              <h2>{copy.professionals.title}</h2>
-            </div>
-
-            <div className="audience-section-layout">
-              <article className="audience-content-card">
-                <p>{copy.professionals.intro}</p>
-                <ul className="audience-list">
-                  {copy.professionals.list.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <p>{copy.professionals.closing}</p>
-              </article>
-
-              <aside className="audience-side-panel">
-                {copy.professionals.sideCards.map((item) => (
-                  <div key={item.title} className="audience-side-card">
-                    <strong>{item.title}</strong>
-                    <p>{item.text}</p>
-                  </div>
-                ))}
-              </aside>
-            </div>
-          </section>
-
-          <section id="clients" className="audience-section audience-section-soft">
-            <div className="audience-section-heading">
-              <p className="audience-section-kicker">{copy.clients.kicker}</p>
-              <h2>{copy.clients.title}</h2>
-            </div>
-
-            <div className="audience-section-layout">
-              <article className="audience-content-card">
-                {copy.clients.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </article>
-
-              <aside className="audience-side-panel">
-                {copy.clients.steps.map((step, index) => (
-                  <div key={step} className="audience-side-card audience-step-card">
-                    <span>{index + 1}</span>
-                    <p>{step}</p>
-                  </div>
-                ))}
-              </aside>
-            </div>
-          </section>
         </div>
       </div>
     </section>

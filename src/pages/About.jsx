@@ -7,7 +7,7 @@ function About({ copy }) {
       <div className="container">
         <div className="about-hero-panel">
           <div className="about-hero-copy">
-            <h1 className="about-title">{copy.title}</h1>
+            <p className="about-eyebrow">{copy.title}</p>
             <p className="about-lead">{copy.lead}</p>
             <div className="about-hero-pills">
               {copy.pills.map((item) => (
@@ -25,31 +25,56 @@ function About({ copy }) {
           </div>
         </div>
 
-        <div className="about-story-stack">
-          <article className="about-story-card about-story-card-wide">
-            <h2>{copy.sections.interdisciplinary.title}</h2>
+        <section className="about-points-panel">
+          <article className="about-point-item">
+            <div className="about-point-head">
+              <span className="about-point-index">01</span>
+              <h2>{copy.sections.interdisciplinary.title}</h2>
+            </div>
             <p>{copy.sections.interdisciplinary.text}</p>
           </article>
 
-          <div className="about-story-row">
-            <article className="about-story-card">
+          <article className="about-point-item">
+            <div className="about-point-head">
+              <span className="about-point-index">02</span>
               <h2>{copy.sections.systemKnowledge.title}</h2>
-              <p>{copy.sections.systemKnowledge.text}</p>
-            </article>
+            </div>
+            <p>{copy.sections.systemKnowledge.text}</p>
+          </article>
 
-            <article className="about-story-card">
+          <article className="about-point-item">
+            <div className="about-point-head">
+              <span className="about-point-index">03</span>
               <h2>{copy.sections.bridging.title}</h2>
-              <p>{copy.sections.bridging.text}</p>
-            </article>
+            </div>
+            <p>{copy.sections.bridging.text}</p>
+          </article>
+        </section>
+
+        <section className="about-support-section">
+          <div className="about-support-heading">
+            <h2>{copy.sections.support.title}?</h2>
           </div>
 
-          <article className="about-story-card about-story-card-wide">
-            <h2>{copy.sections.support.title}</h2>
-            {copy.sections.support.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+          <article className="about-support-card">
+            <div className="about-support-layout">
+              <div className="about-support-copy">
+                {copy.sections.support.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+
+              <aside className="about-support-side">
+                {copy.sections.support.highlights.map((item, index) => (
+                  <div key={item} className="about-support-tag-card">
+                    <span>{index + 1}</span>
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </aside>
+            </div>
           </article>
-        </div>
+        </section>
 
         <div className="about-values-section">
           <div className="about-values-header">

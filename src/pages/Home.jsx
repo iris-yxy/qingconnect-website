@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react'
 import heroImage from '../assets/image.png'
 import challengeImage from '../assets/image copy.png'
 import bridgingImage from '../assets/image copy 2.png'
+import { getTransparentBrandLogo } from '../utils/brandLogo'
 
 function Home({ navigate, copy }) {
   const [interpretingCard, preparationCard, bridgingCard] = copy.services.cards
+  const [heroLogoSrc, setHeroLogoSrc] = useState(heroImage)
+
+  useEffect(() => {
+    let active = true
+
+    getTransparentBrandLogo(heroImage).then((nextSource) => {
+      if (active) {
+        setHeroLogoSrc(nextSource)
+      }
+    })
+
+    return () => {
+      active = false
+    }
+  }, [])
 
   return (
     <>
@@ -14,6 +31,14 @@ function Home({ navigate, copy }) {
 
         <div className="container hero-home-frame">
           <div className="hero-home-grid">
+            <div className="home-hero-image-wrap">
+              <img
+                src={heroLogoSrc}
+                alt={copy.heroImageAlt}
+                className="home-hero-image"
+              />
+            </div>
+
             <div className="hero-home-copy">
               <h1>{copy.title}</h1>
               <p className="hero-text">{copy.lead}</p>
@@ -29,14 +54,6 @@ function Home({ navigate, copy }) {
                   {copy.secondaryButton}
                 </button>
               </div>
-            </div>
-
-            <div className="home-hero-image-wrap">
-              <img
-                src={heroImage}
-                alt={copy.heroImageAlt}
-                className="home-hero-image"
-              />
             </div>
           </div>
 

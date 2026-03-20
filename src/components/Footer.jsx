@@ -1,10 +1,12 @@
+import BrandLogo from './BrandLogo'
+
 function Footer({ copy }) {
   return (
     <footer className="footer">
       <div className="container footer-content footer-content-simple">
         <div className="footer-brand">
-          <span className="footer-mark">QC</span>
-          <div>
+          <BrandLogo className="brand-logo-image footer-brand-image" />
+          <div className="footer-brand-copy">
             <h3>{copy.title}</h3>
             <p>{copy.description}</p>
           </div>
