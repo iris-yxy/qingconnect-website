@@ -1,18 +1,10 @@
-const navItems = [
-  { path: '/', label: 'Home' },
-  { path: '/about', label: 'About Us' },
-  { path: '/services', label: 'Access Our Services' },
-  { path: '/why-choose-us', label: 'Why Choose Us' },
-  { path: '/booking', label: 'Bookings & Enquiries' },
-]
-
-function Header({ currentPath, navigate }) {
+function Header({ currentPath, navigate, language, setLanguage, copy }) {
   return (
     <header className="header">
       <div className="header-ribbon">
         <div className="container ribbon-inner">
-          <p>NAATI Certified Mandarin-English Interpreting</p>
-          <p>Australia-wide by telephone and video</p>
+          <p>{copy.ribbonLeft}</p>
+          <p>{copy.ribbonRight}</p>
         </div>
       </div>
       <div className="container nav">
@@ -26,26 +18,45 @@ function Header({ currentPath, navigate }) {
         >
           <span className="logo-mark">QC</span>
           <span className="logo-copy">
-            <h2>QingConnect</h2>
-            <p>Interpreting & Communication Support</p>
+            <h2>{copy.brandTitle}</h2>
+            <p>{copy.brandSubtitle}</p>
           </span>
         </a>
 
-        <nav className="nav-links">
-          {navItems.map((item) => (
-            <a
-              key={item.path}
-              href={item.path}
-              className={currentPath === item.path ? 'nav-link active' : 'nav-link'}
-              onClick={(event) => {
-                event.preventDefault()
-                navigate(item.path)
-              }}
+        <div className="nav-actions">
+          <nav className="nav-links">
+            {copy.nav.map((item) => (
+              <a
+                key={item.path}
+                href={item.path}
+                className={currentPath === item.path ? 'nav-link active' : 'nav-link'}
+                onClick={(event) => {
+                  event.preventDefault()
+                  navigate(item.path)
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="language-switch" aria-label={copy.languageLabel}>
+            <button
+              type="button"
+              className={language === 'en' ? 'language-option active' : 'language-option'}
+              onClick={() => setLanguage('en')}
             >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+              {copy.languageOptions.en}
+            </button>
+            <button
+              type="button"
+              className={language === 'zh' ? 'language-option active' : 'language-option'}
+              onClick={() => setLanguage('zh')}
+            >
+              {copy.languageOptions.zh}
+            </button>
+          </div>
+        </div>
       </div>
     </header>
   )

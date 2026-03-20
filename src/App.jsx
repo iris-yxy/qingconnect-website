@@ -6,6 +6,7 @@ import About from './pages/About'
 import Services from './pages/Services'
 import WhyChooseUs from './pages/WhyChooseUs'
 import Booking from './pages/Booking'
+import { translations } from './content/translations'
 
 const routes = {
   '/': Home,
@@ -15,6 +16,16 @@ const routes = {
   '/why-choose-us': WhyChooseUs,
   '/booking': Booking,
   '/bookings': Booking,
+}
+
+const routeCopyKeys = {
+  '/': 'home',
+  '/about': 'about',
+  '/services': 'services',
+  '/access': 'services',
+  '/why-choose-us': 'why',
+  '/booking': 'booking',
+  '/bookings': 'booking',
 }
 
 function normalizePath(pathname) {
@@ -30,6 +41,10 @@ function normalizePath(pathname) {
 
 function App() {
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname))
+  const [language, setLanguage] = useState(() => {
+    const savedLanguage = window.localStorage.getItem('qingconnect-language')
+    return savedLanguage === 'zh' ? 'zh' : 'en'
+  })
 
   useEffect(() => {
     const handlePopState = () => {
@@ -46,6 +61,11 @@ function App() {
     }
   }, [pathname])
 
+  useEffect(() => {
+    window.localStorage.setItem('qingconnect-language', language)
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'
+  }, [language])
+
   const navigate = (nextPath) => {
     const normalized = normalizePath(nextPath)
     window.history.pushState({}, '', normalized)
@@ -53,14 +73,21 @@ function App() {
   }
 
   const ActivePage = routes[pathname] ?? Home
+  const copy = translations[language]
 
   return (
     <div className="app">
-      <Header currentPath={pathname} navigate={navigate} />
+      <Header
+        currentPath={pathname}
+        navigate={navigate}
+        language={language}
+        setLanguage={setLanguage}
+        copy={copy.header}
+      />
       <main className="page-main">
-        <ActivePage navigate={navigate} />
+        <ActivePage navigate={navigate} copy={copy[routeCopyKeys[pathname] ?? 'home']} />
       </main>
-      <Footer />
+      <Footer copy={copy.footer} />
     </div>
   )
 }

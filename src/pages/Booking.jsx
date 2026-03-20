@@ -10,7 +10,7 @@ const initialForm = {
   message: '',
 }
 
-function Booking() {
+function Booking({ copy }) {
   const [formData, setFormData] = useState(initialForm)
 
   const handleChange = (event) => {
@@ -21,14 +21,14 @@ function Booking() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const subject = `QingConnect booking enquiry from ${formData.name || 'website visitor'}`
+    const subject = `${copy.form.emailSubjectPrefix} ${formData.name || copy.form.emailBodyLabels.fallbackName}`
     const body = [
-      `Name: ${formData.name}`,
-      `Email: ${formData.email}`,
-      `Date or Time Request: ${formData.requestedTime}`,
-      `Delivery Mode: ${formData.deliveryMode}`,
+      `${copy.form.emailBodyLabels.name}: ${formData.name}`,
+      `${copy.form.emailBodyLabels.email}: ${formData.email}`,
+      `${copy.form.emailBodyLabels.requestedTime}: ${formData.requestedTime}`,
+      `${copy.form.emailBodyLabels.deliveryMode}: ${formData.deliveryMode}`,
       '',
-      'Message:',
+      `${copy.form.emailBodyLabels.message}:`,
       formData.message,
     ].join('\n')
 
@@ -39,144 +39,105 @@ function Booking() {
     <section className="page-section booking-page">
       <div className="container">
         <div className="booking-hero-simple">
-          <h1 className="booking-title">Bookings & Enquiries</h1>
-          <p className="booking-lead">
-            QingConnect provides professional Mandarin-English interpreting
-            services Australia-wide, with flexible delivery via telephone and
-            video conferencing.
-          </p>
-          <p className="booking-lead-secondary">
-            All bookings can be made by submitting a service request form. Once
-            your request is received, confirmation will be provided based on
-            availability.
-          </p>
+          <h1 className="booking-title">{copy.title}</h1>
+          <p className="booking-lead">{copy.lead}</p>
+          <p className="booking-lead-secondary">{copy.leadSecondary}</p>
         </div>
 
         <div className="booking-guidelines booking-guidelines-refined">
-          <article className="booking-guideline-card booking-guideline-card-primary">
-            <div className="booking-guideline-heading">
-              <h3>Booking Notice</h3>
-            </div>
-            <div className="booking-guideline-body">
-              <p>
-                For standard bookings exceeding one hour, a minimum of 24 hours’
-                notice is required.
-              </p>
-              <p>
-                For short teleconference bookings under 30 minutes, please
-                allow at least 2 hours’ notice.
-              </p>
-              <p>
-                For urgent requests, please indicate “URGENT” in the service
-                request form.
-              </p>
-            </div>
-          </article>
-
-          <article className="booking-guideline-card booking-guideline-card-fees">
-            <div className="booking-guideline-heading">
-              <h3>Fees</h3>
-            </div>
-            <div className="booking-guideline-body">
-              <p>
-                Interpreting services are charged at an hourly rate, with time
-                calculated in minimum blocks where applicable.
-              </p>
-              <p>
-                For detailed fee information or a tailored quote, please
-                contact us directly.
-              </p>
-            </div>
-          </article>
-
-          <article className="booking-guideline-card booking-guideline-card-cancellations">
-            <div className="booking-guideline-heading">
-              <h3>Cancellations</h3>
-            </div>
-            <div className="booking-guideline-body">
-              <p>
-                Cancellations or changes to bookings should be made as early
-                as possible.
-              </p>
-              <p>Fees may apply for late cancellations or missed appointments.</p>
-            </div>
-          </article>
+          {copy.guidelines.map((item, index) => (
+            <article
+              key={item.title}
+              className={`booking-guideline-card ${
+                index === 0
+                  ? 'booking-guideline-card-primary'
+                  : index === 1
+                    ? 'booking-guideline-card-fees'
+                    : 'booking-guideline-card-cancellations'
+              }`}
+            >
+              <div className="booking-guideline-heading">
+                <h3>{item.title}</h3>
+              </div>
+              <div className="booking-guideline-body">
+                {item.points.map((point) => (
+                  <p key={point}>{point}</p>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
 
         <div className="booking-form-shell">
           <div className="booking-form-header booking-form-header-simple">
-            <p className="booking-form-enquiry">ENQUIRIES</p>
-            <p className="booking-form-enquiry-copy">
-              For any booking or fee enquiries, please contact:
-            </p>
+            <p className="booking-form-enquiry">{copy.enquiryLabel}</p>
+            <p className="booking-form-enquiry-copy">{copy.enquiryCopy}</p>
           </div>
 
           <form className="booking-form-card booking-form-card-refined" onSubmit={handleSubmit}>
             <div className="booking-form-grid">
               <label>
-                <span>Your Name</span>
+                <span>{copy.form.fields.name.label}</span>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Full name"
+                  placeholder={copy.form.fields.name.placeholder}
                   required
                 />
               </label>
 
               <label>
-                <span>Email</span>
+                <span>{copy.form.fields.email.label}</span>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="name@example.com"
+                  placeholder={copy.form.fields.email.placeholder}
                   required
                 />
               </label>
 
               <label>
-                <span>Date or Time Request</span>
+                <span>{copy.form.fields.requestedTime.label}</span>
                 <input
                   type="text"
                   name="requestedTime"
                   value={formData.requestedTime}
                   onChange={handleChange}
-                  placeholder="Preferred date, time, or timeframe"
+                  placeholder={copy.form.fields.requestedTime.placeholder}
                 />
               </label>
 
               <label>
-                <span>Delivery Mode</span>
+                <span>{copy.form.fields.deliveryMode.label}</span>
                 <input
                   type="text"
                   name="deliveryMode"
                   value={formData.deliveryMode}
                   onChange={handleChange}
-                  placeholder="Telephone / video conferencing"
+                  placeholder={copy.form.fields.deliveryMode.placeholder}
                 />
               </label>
 
               <label className="booking-form-full">
-                <span>Message</span>
+                <span>{copy.form.fields.message.label}</span>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Please include context, participants, language needs, and whether the request is urgent."
+                  placeholder={copy.form.fields.message.placeholder}
                   required
                 />
               </label>
             </div>
 
             <button type="submit" className="booking-submit-button">
-              Submit Request
+              {copy.form.submit}
             </button>
-            <p className="booking-form-note">
-              Submitting will open your default email app addressed to {recipientEmail}.
-            </p>
+            <p className="booking-form-note">{copy.form.note}</p>
           </form>
         </div>
       </div>

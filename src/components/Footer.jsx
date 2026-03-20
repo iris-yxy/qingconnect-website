@@ -1,35 +1,32 @@
-function Footer() {
+function Footer({ copy }) {
   return (
     <footer className="footer">
       <div className="container footer-content footer-content-simple">
         <div className="footer-brand">
           <span className="footer-mark">QC</span>
           <div>
-            <h3>QingConnect</h3>
-            <p>
-              Professional Mandarin-English interpreting and communication
-              support across Australia.
-            </p>
+            <h3>{copy.title}</h3>
+            <p>{copy.description}</p>
           </div>
         </div>
 
         <div className="footer-middle">
           <div className="footer-contact-inline">
-            <span>Contact</span>
-            <a className="footer-email" href="mailto:christinacq2010@hotmail.com">
-              christinacq2010@hotmail.com
+            <span>{copy.contactLabel}</span>
+            <a className="footer-email" href={`mailto:${copy.email}`}>
+              {copy.email}
             </a>
           </div>
 
           <div className="footer-meta">
-            <span>Australia-wide</span>
-            <span>Telephone & video conferencing</span>
-            <span>Mandarin-English support</span>
+            {copy.meta.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
           </div>
         </div>
 
         <div className="footer-bottom footer-bottom-simple">
-          <p>© 2026 QingConnect. All rights reserved.</p>
+          <p>{copy.copyright}</p>
         </div>
       </div>
     </footer>

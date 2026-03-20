@@ -204,6 +204,14 @@ textarea {
   border: 1px solid rgba(82, 122, 104, 0.08);
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
 .nav-link {
   padding: 10px 17px;
   border-radius: 999px;
@@ -227,6 +235,44 @@ textarea {
   background: linear-gradient(135deg, rgba(147, 200, 173, 0.95), rgba(242, 229, 173, 0.98));
   color: #21352d;
   font-weight: 500;
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(82, 122, 104, 0.08);
+  box-shadow: 0 10px 24px rgba(83, 112, 94, 0.08);
+}
+
+.language-option {
+  min-width: 66px;
+  min-height: 38px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #41534c;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.language-option:hover {
+  color: var(--green-deep);
+  transform: translateY(-1px);
+}
+
+.language-option.active {
+  background: linear-gradient(135deg, rgba(147, 200, 173, 0.95), rgba(242, 229, 173, 0.98));
+  color: #21352d;
+  box-shadow: 0 8px 18px rgba(124, 160, 139, 0.16);
 }
 
 .page-section {
@@ -924,9 +970,19 @@ textarea {
     align-items: flex-start;
   }
 
+  .nav-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .nav-links {
     width: 100%;
     border-radius: 22px;
+  }
+
+  .language-switch {
+    align-self: flex-end;
   }
 
   .hero h1 {
