@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const recipientEmail = 'christinacq2010@hotmail.com'
+const formName = 'booking-enquiry'
 
 const initialForm = {
   name: '',
@@ -12,27 +12,37 @@ const initialForm = {
 
 function Booking({ copy }) {
   const [formData, setFormData] = useState(initialForm)
+  const [submitState, setSubmitState] = useState('idle')
 
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData((current) => ({ ...current, [name]: value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const subject = `${copy.form.emailSubjectPrefix} ${formData.name || copy.form.emailBodyLabels.fallbackName}`
-    const body = [
-      `${copy.form.emailBodyLabels.name}: ${formData.name}`,
-      `${copy.form.emailBodyLabels.email}: ${formData.email}`,
-      `${copy.form.emailBodyLabels.requestedTime}: ${formData.requestedTime}`,
-      `${copy.form.emailBodyLabels.deliveryMode}: ${formData.deliveryMode}`,
-      '',
-      `${copy.form.emailBodyLabels.message}:`,
-      formData.message,
-    ].join('\n')
+    setSubmitState('submitting')
 
-    window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': formName,
+          ...formData,
+        }).toString(),
+      })
+
+      if (!response.ok) {
+        throw new Error('Netlify form submission failed')
+      }
+
+      setFormData(initialForm)
+      setSubmitState('success')
+    } catch {
+      setSubmitState('error')
+    }
   }
 
   return (
@@ -74,7 +84,14 @@ function Booking({ copy }) {
             <p className="booking-form-enquiry-copy">{copy.enquiryCopy}</p>
           </div>
 
-          <form className="booking-form-card booking-form-card-refined" onSubmit={handleSubmit}>
+          <form
+            className="booking-form-card booking-form-card-refined"
+            name={formName}
+            method="POST"
+            data-netlify="true"
+            onSubmit={handleSubmit}
+          >
+            <input type="hidden" name="form-name" value={formName} />
             <div className="booking-form-grid">
               <label>
                 <span>{copy.form.fields.name.label}</span>
@@ -134,10 +151,20 @@ function Booking({ copy }) {
               </label>
             </div>
 
-            <button type="submit" className="booking-submit-button">
-              {copy.form.submit}
+            <button
+              type="submit"
+              className="booking-submit-button"
+              disabled={submitState === 'submitting'}
+            >
+              {submitState === 'submitting' ? copy.form.submitting : copy.form.submit}
             </button>
             <p className="booking-form-note">{copy.form.note}</p>
+            {submitState === 'success' ? (
+              <p className="booking-form-status booking-form-status-success">{copy.form.success}</p>
+            ) : null}
+            {submitState === 'error' ? (
+              <p className="booking-form-status booking-form-status-error">{copy.form.error}</p>
+            ) : null}
           </form>
         </div>
       </div>
