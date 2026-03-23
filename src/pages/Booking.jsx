@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 const formName = 'booking-enquiry'
+const submitEndpoint = 'https://formsubmit.co/ajax/qingconnectinterpreting@gmail.com'
 
 const initialForm = {
   name: '',
@@ -25,13 +26,19 @@ function Booking({ copy }) {
     setSubmitState('submitting')
 
     try {
-      const response = await fetch('/netlify-booking-form.html', {
+      const response = await fetch(submitEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': formName,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: 'New QingConnect booking enquiry',
+          _template: 'table',
+          _honey: '',
+          formName,
           ...formData,
-        }).toString(),
+        }),
       })
 
       if (!response.ok) {
@@ -88,11 +95,8 @@ function Booking({ copy }) {
             className="booking-form-card booking-form-card-refined"
             name={formName}
             method="POST"
-            action="/netlify-booking-form.html"
-            data-netlify="true"
             onSubmit={handleSubmit}
           >
-            <input type="hidden" name="form-name" value={formName} />
             <div className="booking-form-grid">
               <label>
                 <span>{copy.form.fields.name.label}</span>
