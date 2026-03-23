@@ -88,6 +88,7 @@ function Booking({ copy }) {
             className="booking-form-card booking-form-card-refined"
             name={formName}
             method="POST"
+            action="/netlify-booking-form.html"
             data-netlify="true"
             onSubmit={handleSubmit}
           >
