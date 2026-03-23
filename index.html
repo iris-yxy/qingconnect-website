@@ -7,7 +7,8 @@
     <title>QingConnect Interpreting & Communication Support</title>
   </head>
   <body>
-    <form name="booking-enquiry" data-netlify="true" hidden>
+    <form name="booking-enquiry" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="booking-enquiry" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="text" name="requestedTime" />
