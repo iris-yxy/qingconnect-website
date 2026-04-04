@@ -200,7 +200,16 @@ export const translations = {
           title: 'Working with Professionals',
           text:
             'QingConnect supports organisations such as law firms, insurers, investigators, medical and mental health practitioners, rehabilitation providers, and government or private service providers.',
-          highlights: ['Law firms', 'Insurers', 'Medical & mental health'],
+          highlights: [
+            'Law firms',
+            'Insurers',
+            'Investigators',
+            'Medical practitioners',
+            'Mental health practitioners',
+            'Rehabilitation providers',
+            'Government agencies',
+            'Private service providers',
+          ],
         },
         clients: {
           badge: 'Pathway 02',
@@ -517,7 +526,16 @@ export const translations = {
           title: 'Working with Professionals',
           text:
             'QingConnect 支持律师事务所、保险公司、调查人员、医疗与心理健康从业者、康复服务机构以及政府或私人服务机构。',
-          highlights: ['律师事务所', '保险公司', '医疗与心理健康'],
+          highlights: [
+            '律师事务所',
+            '保险公司',
+            '调查人员',
+            '医疗从业者',
+            '心理健康从业者',
+            '康复服务机构',
+            '政府机构',
+            '私人服务机构',
+          ],
         },
         clients: {
           badge: '路径 02',
